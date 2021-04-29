@@ -1,0 +1,24 @@
+#######################################
+# Syntax Coloring Map For DFRobot_MINI_CONTROL
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+DFRobot_MINI_CONTROL	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin	KEYWORD2
+readX	KEYWORD2
+readBtnABCD	KEYWORD2
+readY	KEYWORD2
+
+reset	KEYWORD2
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+
