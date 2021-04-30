@@ -29,16 +29,22 @@ while True:
   A,B,C,D = control.readBtnABCD()
   scanX = control.readX()
   scanY = control.readY()
+  #当摇杆运动时打印摇杆 X方向的AD值
   if scanX < 480 or scanX > 530:
     print("X:%d",scanX)
+  #当摇杆运动时打印摇杆 Y方向的AD值
   if scanY < 480 or scanY > 530:
     print("Y:%d",scanY)
+  #当按钮A被按下
   if A = 1:
     print("A")
-  if A = 1:
+  #当按钮B被按下
+  if B = 1:
     print("B")
-  if A = 1:
+  #当按钮C被按下
+  if C = 1:
     print("C")
-  if A = 1:
+  #当按钮D被按下
+  if D = 1:
     print("D")
   time.sleep(0.05)

@@ -28,14 +28,31 @@ MINI_CONTROL_Y       = 0xB3  #读取y方向上的模拟值
   '''
   def begin(self):
     data = read_reg(MINI_CONTROL_ABCD,1)
+
+  '''
+    @brief 读取mini control模块 x方向的模拟值
+    @return 返回10位AD模拟值,范围是0~1023
+  '''
   def read_X(self):
     data = read_reg(MINI_CONTROL_X,2)
     x = data[0] << 8 | data[1]
     return x
+    
+  '''
+    @brief 读取mini control模块 y方向的模拟值
+    @return 返回10位AD模拟值,范围是0~1023
+  '''
   def read_Y(self):
     data = read_reg(MINI_CONTROL_Y,2)
     y = data[0] << 8 | data[1]
     return y
+  '''
+    @brief 读取按钮A,B,C,D的状态
+    @param btnA 按钮A的状态,1:按下, 0:松开
+    @param btnB 按钮B的状态,1:按下, 0:松开
+    @param btnC 按钮C的状态,1:按下, 0:松开
+    @param btnD 按钮D的状态,1:按下, 0:松开
+  '''
  def readBtnABCD(self):
     data = read_reg(MINI_CONTROL_ABCD,1)
     c = data[0] & 0x01
@@ -43,13 +60,13 @@ MINI_CONTROL_Y       = 0xB3  #读取y方向上的模拟值
     b = (value & 0x04)>>1
     d = (value & 0x08)>>1
     return a,b,c,d
-  def write_data(self, data):
-    self.i2cbus.write_byte(self._addr ,data)
     
-  def write_reg(self, reg, data):
-    self.i2cbus.write_byte(self._addr ,reg)
-    self.i2cbus.write_byte(self._addr ,data)
-
+  '''
+    @brief 读取寄存器reg的值
+    @param reg 寄存器
+    @param len 所读数据的成都
+    @return 读取数据的数组
+  '''
   def read_reg(self, reg ,len):
     self.i2cbus.write_byte(self._addr,reg)
     time.sleep(0.03)

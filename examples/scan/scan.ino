@@ -22,6 +22,7 @@ DFRobot_MINI_CONTROL control;
 uint8_t A, B, C, D;
 uint16_t scanX = 0;
 uint16_t scanY = 0;
+//扫描mini control module上面的控制信息
 void scanC(){
 
   control.readBtnABCD(&A, &B, &C, &D);
@@ -30,30 +31,35 @@ void scanC(){
 }
 void setup() {
   Serial.begin(9600);  // start serial for output
+  //模块初始化
   control.begin();
 }
 
 void loop() {
   scanC();
+  //当摇杆运动时打印摇杆 X方向的AD值
   if(scanX < 480 || scanX > 530){
     Serial.print("X:");
     Serial.println(scanX);
   }
+  //当摇杆运动时打印摇杆 Y方向的AD值
   if(scanY < 480 || scanY > 530){
     Serial.print("Y:");
     Serial.println(scanY);   
   }
+  //当按钮B被按下
   if(B == 1){
     Serial.println("B");
     }
+  //当按钮A被按下
   if(A == 1){
     Serial.println("A");
    }
-
+  //当按钮C被按下
   if(C == 1){
     Serial.println("C");
   }
-  
+  //当按钮D被按下
   if(D == 1){
     Serial.println("D");
   }

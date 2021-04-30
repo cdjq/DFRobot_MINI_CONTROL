@@ -1,6 +1,6 @@
 /**！
  * @file control.ino
- * @brief 识别A,B,C,D四个按钮的单击，双击,长按和摇杆的行为
+ * @brief 识别mini control module上A,B,C,D四个按钮的单击，双击,长按和摇杆的行为
  * @copyright  Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
  * @licence     The MIT License (MIT)
  * @author [fengli](li.feng@dfrobot.com)
@@ -66,16 +66,14 @@ typedef enum
 }eDir_t;
 eDir_t  lastDirection = CENTRAL;
 eDir_t  Direction = CENTRAL;
-void setup() {
-  Serial.begin(9600);  // start serial for output
-  control.begin();
-}
+//扫描mini control module上面的控制信息
 void scan(){
 
   control.readBtnABCD(&A, &B, &C, &D);
   scanX = control.readX();
   scanY = control.readY();
 }
+//识别按钮的单击,双击和长按
 void btnControl(){
   if(A && flagA == 0){
     stamp1 = millis();
@@ -239,7 +237,7 @@ void btnControl(){
     Serial.println("long press D");
   }
 }
-
+//获取摇杆X,Y方向上面的控制信息
 void xyContral(){
   
   if(scanX > 700 && scanY > 700){
@@ -291,9 +289,17 @@ void xyContral(){
   lastDirection = Direction;
  }
 
+void setup() {
+  Serial.begin(9600);  // start serial for output
+  //模块初始化
+  control.begin();
+}
+
 void loop() {
   scan();
+  //识别按钮的单击,双击和长按
   btnControl();
+  //获取摇杆X,Y方向上面的控制信息
   xyContral();
   delay(10);
 }
