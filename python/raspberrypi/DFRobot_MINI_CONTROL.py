@@ -14,10 +14,10 @@ import serial
 import time
 import smbus
 class DFRobot_MINI_CONTROL(object):
-  IIC_ADDRESS          = 0x84  #I2C地址
-  MINI_CONTROL_ABCD    = 0xB1  #读取A,B,C,D四个按钮的状态寄存器
-  MINI_CONTROL_X       = 0xB2  #读取x方向上的模拟�?
-  MINI_CONTROL_Y       = 0xB3  #读取y方向上的模拟�?
+  IIC_ADDRESS          = 0x84  #I2C��ַ
+  MINI_CONTROL_ABCD    = 0xB1  #��ȡA,B,C,D�ĸ���ť��״̬�Ĵ���
+  MINI_CONTROL_X       = 0xB2  #��ȡx�����ϵ�ģ��ֵ
+  MINI_CONTROL_Y       = 0xB3  #��ȡy�����ϵ�ģ��ֵ
   rxbuf = [0,0,0,0]
   def __init__(self ,bus,address):
     self.i2cbus = smbus.SMBus(bus)
@@ -30,8 +30,8 @@ class DFRobot_MINI_CONTROL(object):
     data = self.read_reg(self.MINI_CONTROL_ABCD,1)
 
   '''
-    @brief 读取mini control模块 x方向的模拟�?
-    @return 返回10位AD模拟�?范围�?~1023
+    @brief ��ȡmini controlģ�� x�����ģ��ֵ
+    @return ����10λADģ��ֵ,��Χ��0~1023
   '''
   def read_X(self):
     data = self.read_reg(self.MINI_CONTROL_X,2)
@@ -39,8 +39,8 @@ class DFRobot_MINI_CONTROL(object):
     return x
     
   '''
-    @brief 读取mini control模块 y方向的模拟�?
-    @return 返回10位AD模拟�?范围�?~1023
+    @brief ��ȡmini controlģ�� y�����ģ��ֵ
+    @return ����10λADģ��ֵ,��Χ��0~1023
   '''
   def read_Y(self):
     data = self.read_reg(self.MINI_CONTROL_Y,2)
@@ -48,11 +48,11 @@ class DFRobot_MINI_CONTROL(object):
     return y
     
   '''
-    @brief 读取按钮A,B,C,D的状�?
-    @param btnA 按钮A的状�?1:按下, 0:松开
-    @param btnB 按钮B的状�?1:按下, 0:松开
-    @param btnC 按钮C的状�?1:按下, 0:松开
-    @param btnD 按钮D的状�?1:按下, 0:松开
+    @brief ��ȡ��ťA,B,C,D��״̬
+    @param btnA ��ťA��״̬,1:����, 0:�ɿ�
+    @param btnB ��ťB��״̬,1:����, 0:�ɿ�
+    @param btnC ��ťC��״̬,1:����, 0:�ɿ�
+    @param btnD ��ťD��״̬,1:����, 0:�ɿ�
   '''
   def read_btn_ABCD(self):
     data = self.read_reg(self.MINI_CONTROL_ABCD,1)
@@ -62,13 +62,13 @@ class DFRobot_MINI_CONTROL(object):
     a = (data[0] & 0x02)>>1
 
     #print(a)
-    return a,c,b,d
+    return a,b,c,d
     
   '''
-    @brief 读取寄存器reg的�?
-    @param reg 寄存�?
-    @param len 所读数据的成都
-    @return 读取数据的数�?
+    @brief ��ȡ�Ĵ���reg��ֵ
+    @param reg �Ĵ���
+    @param len �������ݵĳɶ�
+    @return ��ȡ���ݵ�����
   '''
   def read_reg(self, reg ,len):
     self.i2cbus.write_byte(self._addr,reg)
