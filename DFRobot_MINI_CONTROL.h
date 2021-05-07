@@ -23,7 +23,7 @@
 #endif
 
 
-#define IIC_ADDRESS          0x84  //I2C地址
+#define IIC_ADDRESS          0x44  //I2C地址
 #define MINI_CONTROL_ABCD    0xB1  //读取A,B,C,D四个按钮的状态寄存器
 #define MINI_CONTROL_X       0xB2  //读取x方向上的模拟值
 #define MINI_CONTROL_Y       0xB3  //读取y方向上的模拟值
