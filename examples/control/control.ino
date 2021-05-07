@@ -7,7 +7,7 @@
  * @version  V1.0
  * @date  2021-04-29
  * @get from https://www.dfrobot.com
- * @https://github.com/DFRobot_MINI_CONTROL
+ * @https://github.com/DFRobot/DFRobot_MINI_CONTROL
  */
 
 #include "DFRobot_MINI_CONTROL.h"
