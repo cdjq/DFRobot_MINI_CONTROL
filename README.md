@@ -29,8 +29,9 @@ To use this library, first download the library file, paste it into the \Arduino
 
   /**
    * @brief 初始化I2C
+   * @return true(初始化成功)/false(初始化失败)
   */
-  void begin();
+  bool begin();
   
   /**
    * @brief 读取mini control模块 x方向的模拟值

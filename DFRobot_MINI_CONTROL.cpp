@@ -17,10 +17,16 @@ DFRobot_MINI_CONTROL::DFRobot_MINI_CONTROL(uint8_t address,TwoWire *pWire){
 
 }
 
-void DFRobot_MINI_CONTROL::begin(){
+bool DFRobot_MINI_CONTROL::begin(){
   uint8_t value;
+  uint8_t ret;
   _pWire->begin();
-  readReg(MINI_CONTROL_ABCD,&value,1);
+  ret = readReg(MINI_CONTROL_ABCD,&value,1);
+  if(ret == 0){
+     return false;
+  } else {
+     return true;
+  }
 }
 uint16_t DFRobot_MINI_CONTROL::readX(){
   
@@ -68,7 +74,7 @@ uint8_t DFRobot_MINI_CONTROL::readReg(uint8_t reg, void* pBuf, size_t size)
   _pWire->beginTransmission(_deviceAddr);
   _pWire->write(reg);
   if( _pWire->endTransmission() != 0 ) {
-      return false;
+      return 0;
   }
 
   _pWire->requestFrom(_deviceAddr, size);

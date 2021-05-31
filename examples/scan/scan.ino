@@ -32,7 +32,10 @@ void scanC(){
 void setup() {
   Serial.begin(9600);  // start serial for output
   //模块初始化
-  control.begin();
+  while(!control.begin()){
+     Serial.println("I2C 通信失败");
+     delay(1000);
+  }
 }
 
 void loop() {
