@@ -46,15 +46,19 @@ uint16_t DFRobot_MINI_CONTROL::readY()
   y = value[0] << 8 | value[1];
   return y;
 }
-void DFRobot_MINI_CONTROL::readBtnABCD(uint8_t *A,uint8_t *B,uint8_t *C,uint8_t *D){
+bool DFRobot_MINI_CONTROL::readBtnABCD(uint8_t *A,uint8_t *B,uint8_t *C,uint8_t *D){
   
   uint8_t value;
-  readReg(MINI_CONTROL_ABCD,&value,1);
+  uint8_t ret = readReg(MINI_CONTROL_ABCD,&value,1);
   *C = value & 0X1;
   *A = (value & 0X02)>>1;
   *B = (value & 0X04)>>2;
   *D = (value & 0X08)>>3;
- 
+  if(ret == 0){
+     return false;
+   }else{
+     return true;
+   }
 }
 void DFRobot_MINI_CONTROL::writeReg(uint8_t reg, uint8_t data)
 {

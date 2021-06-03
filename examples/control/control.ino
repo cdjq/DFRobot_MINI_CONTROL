@@ -67,11 +67,12 @@ typedef enum
 eDir_t  lastDirection = CENTRAL;
 eDir_t  Direction = CENTRAL;
 //扫描mini control module上面的控制信息
-void scan(){
+bool scan(){
 
-  control.readBtnABCD(&A, &B, &C, &D);
+  bool ret = control.readBtnABCD(&A, &B, &C, &D);
   scanX = control.readX();
   scanY = control.readY();
+  return ret;
 }
 //识别按钮的单击,双击和长按
 void btnControl(){
@@ -296,13 +297,19 @@ void setup() {
      Serial.println("I2C 通信失败");
      delay(1000);
   }
+  Serial.println("模块初始化成功");
 }
 
 void loop() {
-  scan();
+  bool ret = scan();
   //识别按钮的单击,双击和长按
-  btnControl();
-  //获取摇杆X,Y方向上面的控制信息
-  xyContral();
-  delay(10);
+  if(ret){
+    btnControl();
+    //获取摇杆X,Y方向上面的控制信息
+    xyContral();
+    delay(10);
+  } else {
+    Serial.println("I2C 通信失败");
+    delay(2000);
+  }
 }

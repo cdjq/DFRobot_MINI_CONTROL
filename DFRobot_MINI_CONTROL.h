@@ -65,7 +65,7 @@ public:
    * @param btnC 按钮C的状态,1:按下, 0:松开
    * @param btnD 按钮D的状态,1:按下, 0:松开
    */
-  void readBtnABCD(uint8_t *btnA,uint8_t *btnB,uint8_t *btnC,uint8_t *btnD);
+  bool readBtnABCD(uint8_t *btnA,uint8_t *btnB,uint8_t *btnC,uint8_t *btnD);
 private:
   uint8_t _deviceAddr;
   TwoWire *_pWire;
